@@ -17,7 +17,7 @@
     </div>
     <div>
       <div v-if="inputItem.type === 'select'">
-        <select id="cars" class="input-select">
+        <select id="cars" class="input-select" v-model="inputForm">
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
           <option value="vw">VW</option>
@@ -44,28 +44,15 @@ export default {
     },
   },
   data() {
-    return {
-      inputForm: [],
-    };
+    return {};
   },
   methods: {
-    // changeInput({ target }, name) {
-    //   this.$emit("changeInput", (name.value = target.value));
-    // },
-
     changeInput(event, name) {
       this.$emit("changeInput", {
         value: (name.value = event.target.value),
         name: name,
       });
     },
-
-    // changeInput({ target }, input) {
-    //   this.$emit("changeInput", { value: target.value, name: input.value });
-    // },
-    // changeInput(e) {
-    //   this.$emit("changeInput", { value: e.target.value, name: this.name });
-    // },
   },
   computed: {
     valueInput: {

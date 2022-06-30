@@ -124,10 +124,6 @@ export default {
   },
 
   methods: {
-    // changeInput(e) {
-    //   console.log("check changeInput ", e);
-    // },
-
     handleNext() {
       if (this.state.currentStep === 3) {
         return;
@@ -141,18 +137,12 @@ export default {
         this.valiDationForm2();
         return;
       }
-      // if (this.state.currentStep === 3) {
-      //   this.valiDationForm3();
-      // }
     },
     handlePrevious() {
       if (this.state.currentStep === 1) {
         return;
       }
       this.state.currentStep--;
-    },
-    handleRest() {
-      this.state.currentStep = 1;
     },
 
     valiDationForm1() {
@@ -170,14 +160,14 @@ export default {
       } else {
         form.listField.email.message = "";
       }
-      // const validationEmail = /^[a-zA-Z0-9.]+@+[a-zA-Z0-9]+.+[A-z]/.test(email);
-      // if (!validationEmail) {
-      //   form.listField.email.message = "The field must be email!";
-      // }else{
-      //   form.listField.email.message = "";
-      // }
+      const validationEmail = /^[a-zA-Z0-9.]+@+[a-zA-Z0-9]+.+[A-z]/.test(email);
+      if (!validationEmail) {
+        form.listField.email.message = "The field must be email!";
+      } else {
+        form.listField.email.message = "";
+      }
 
-      if (!name || !email) {
+      if (!name || !email || !validationEmail) {
         return;
       } else {
         this.state.currentStep++;
@@ -200,10 +190,7 @@ export default {
       } else {
         form.listField.numberEmployees.message = "";
       }
-      // if (!company.value.trim() || !numberEmployees.value.trim()) {
-      //   numberEmployees.message = "The field is required!";
-      //   company.message = "The field is required!";
-      // }
+
       if (!company && !numberEmployees) {
         return;
       } else {
@@ -214,6 +201,13 @@ export default {
     //   this.state.currentStep++;
     //   return;
     // },
+    handleRest() {
+      this.state.currentStep = 1;
+      this.state.formStep[0].listField.name.value = "";
+      this.state.formStep[0].listField.email.value = "";
+      this.state.formStep[1].listField.company.value = "";
+      this.state.formStep[1].listField.numberEmployees.value = "";
+    },
   },
 };
 </script>
